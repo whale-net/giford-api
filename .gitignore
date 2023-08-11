@@ -1,0 +1,4 @@
+.python-version
+giford_api/_version.py
+*.egg-info
+*.pyc

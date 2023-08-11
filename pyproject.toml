@@ -1,0 +1,42 @@
+# TODO - trim out anything unnecessary
+# this was copy pasted from giford and modified slightly
+[build-system]
+requires = ['setuptools', 'setuptools_scm[toml]>=6.2']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'giford-api'
+authors = [{name = 'Alex Harding'}]
+requires-python = '>=3.10'
+description = 'web api for giford'
+#version = "0.2.0" using setuptools_scm
+dynamic = ['version']
+license = {file = 'LICENSE.txt'}
+dependencies = [
+    'fastapi',
+    'setuptools',
+    'setuptools-scm',
+    'giford'
+]
+
+[project.optional-dependencies]
+dev = [
+    'pytest',
+    'pytest-xdist',
+    'black',
+    'pytest-cov'
+]
+
+
+[project.urls]
+homepage = 'https://github.com/whale-net/giford-api'
+repository = 'https://github.com/whale-net/giford-api.git'
+
+[tool.setuptools.packages.find]
+where = ['.']
+include = ['giford*']
+exclude = ['tests*']
+namespaces = false  # true by default
+
+[tool.setuptools_scm]
+write_to = 'giford_api/_version.py'
