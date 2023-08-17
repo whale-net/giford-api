@@ -15,6 +15,7 @@ router = APIRouter()
 async def test() -> dict[str, str]:
     return {"hello": "world"}
 
+# TODO - https://fastapi.tiangolo.com/tutorial/request-files/#file-parameters-with-uploadfile
 @router.post('/slide')
 async def slide(img: Annotated[bytes, File()]):
     simg = SingleImage()
