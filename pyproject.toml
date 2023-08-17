@@ -28,7 +28,8 @@ dev = [
     'pytest',
     'pytest-xdist',
     'black',
-    'pytest-cov'
+    'pytest-cov',
+    'mypy'
 ]
 
 
