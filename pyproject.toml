@@ -16,7 +16,8 @@ dependencies = [
     'fastapi',
     'setuptools',
     'setuptools-scm',
-    'giford'
+    'giford',
+    'python-multipart'
 ]
 
 [project.optional-dependencies]

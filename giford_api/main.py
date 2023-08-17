@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
-from giford_api.routers import basic
+# using relative because mypy seems to like that
+from .routers import basic
 
 app = FastAPI()
 
@@ -9,5 +10,5 @@ app = FastAPI()
 app.include_router(basic.router)
 
 @app.get("/")
-async def root():
+async def root() -> str:
     return "this is the root"
