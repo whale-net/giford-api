@@ -3,7 +3,7 @@ from tempfile import NamedTemporaryFile
 from typing import Annotated # can this be replaced with 3.10?
 
 
-from fastapi import APIRouter, File
+from fastapi import APIRouter, UploadFile
 
 from giford.image import SingleImage, MultiImage
 from giford.frame import FrameBatch
@@ -17,11 +17,9 @@ async def test() -> dict[str, str]:
 
 # TODO - https://fastapi.tiangolo.com/tutorial/request-files/#file-parameters-with-uploadfile
 @router.post('/slide')
-async def slide(img: Annotated[bytes, File()]):
+async def slide(img: UploadFile):
     simg = SingleImage()
-    with NamedTemporaryFile('wb') as fd:
-        fd.write(img)
-        simg.load(fd.name)
+    simg.load(img.file)
 
     batch = FrameBatch.create_from_image(simg)
 
