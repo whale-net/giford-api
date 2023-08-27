@@ -1,13 +1,15 @@
 import os
+import io
 from tempfile import NamedTemporaryFile
 from typing import Annotated # can this be replaced with 3.10?
 
 
-from fastapi import APIRouter, UploadFile
+from fastapi import APIRouter, UploadFile, Response
 
 from giford.image import SingleImage, MultiImage
 from giford.frame import FrameBatch
-from giford.action.scroll import Scroll
+from giford.action import Scroll
+from giford.action import Shake
 
 router = APIRouter()
 
@@ -33,3 +35,24 @@ async def slide(img: UploadFile):
     mimg.save(test_output)
         
     return "written to server idiot"
+
+@router.post('/shake')
+async def shake(img: UploadFile):
+    # TODO - helper for image creation make sense?
+    simg = SingleImage()
+    simg.load(img.file)
+
+    batch = FrameBatch.create_from_image(simg)
+    
+    s = Shake()
+    out_batch = s.process(batch, frame_count=30)
+    mimg = MultiImage.create_from_frame_batch(out_batch)
+
+    # want mimg as bytes to return in response
+
+    with io.BytesIO() as f:
+        mimg.save(f)
+        f.seek(0)
+        return Response(content=f.read())
+    
+    
