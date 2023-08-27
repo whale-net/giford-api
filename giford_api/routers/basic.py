@@ -23,7 +23,7 @@ async def slide(img: Annotated[bytes, File()]):
         fd.write(img)
         simg.load(fd.name)
 
-    batch = FrameBatch.create_from_single_image(simg)
+    batch = FrameBatch.create_from_image(simg)
 
     s = Scroll()
     out_batch = s.process(batch, is_horizontal_scroll=True, is_vertical_scroll=True)
