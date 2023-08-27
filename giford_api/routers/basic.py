@@ -5,9 +5,9 @@ from typing import Annotated # can this be replaced with 3.10?
 
 from fastapi import APIRouter, File
 
-from giford.frame_wrapper import SingleImage, MultiImage
-from giford.frame_batch import FrameBatch
-from giford.image_actions.scroll import Scroll
+from giford.image import SingleImage, MultiImage
+from giford.frame import FrameBatch
+from giford.action.scroll import Scroll
 
 router = APIRouter()
 
